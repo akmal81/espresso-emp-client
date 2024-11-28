@@ -8,27 +8,28 @@ import Root from "../layouts/Root";
 const router = createBrowserRouter(
     [
         {
-            path:'/',
-            element:<Root></Root>,
-            children:[
+            path: '/',
+            element: <Root></Root>,
+            children: [
                 {
                     path: '/',
-                    element: <Home></Home>
+                    element: <Home></Home>,
+                    loader: () => fetch('http://localhost:5000/addCoffee')
                 },
                 {
                     path: '/add',
-                    element:<AddCoffee></AddCoffee>
+                    element: <AddCoffee></AddCoffee>
                 }
             ]
-         
+
         },
         {
-            path:'/update',
-            element:<UpdateCoffee></UpdateCoffee>
+            path: '/update',
+            element: <UpdateCoffee></UpdateCoffee>
         },
         {
-            path:'/details',
-            element:<CoffeeDetails></CoffeeDetails>
+            path: '/details',
+            element: <CoffeeDetails></CoffeeDetails>
 
         }
     ]
