@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import { CoffeesContext } from '../Provider/CoffesPorvider';
 
 const AddCoffee = () => {
+const {coffees, setCoffees}= useContext(CoffeesContext);
+
 
     const handleAddCoffee = (e) => {
         e.preventDefault();
@@ -28,10 +31,18 @@ const AddCoffee = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
+
+                if (!data.insertedId){
+                    // this line update all coffee 
+                    setCoffees((prev)=>[...prev, coffees])
+                }
                 // sweet alert
                 form.reset();
-            })
+            });
+
     }
+
+
 
     return (
         <section className=''>

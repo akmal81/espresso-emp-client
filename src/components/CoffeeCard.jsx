@@ -32,7 +32,7 @@ const CoffeeCard = ({ coffee }) => {
             <div className='space-y-2'>
                 <h4 className='text-xl font-bold'>Name: <span className='font-normal ml-2' >{name}</span> </h4>
                 <h4 className='text-xl font-bold'>Chef: <span className='font-normal ml-2' >{chef}</span> </h4>
-                <h4 className='text-xl font-bold'>Name: <span className='font-normal ml-2' >{price}</span>  taka</h4>
+                <h4 className='text-xl font-bold'>Price: <span className='font-normal ml-2' >{price}</span>  taka</h4>
 
             </div>
             <div className='flex flex-col w-fit gap-4'>
