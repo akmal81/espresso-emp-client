@@ -1,18 +1,50 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../assets/logo.png'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Header = () => {
+    const { user, signOutUser } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location);
+
+    const handleLogOUt=()=>{
+        signOutUser()
+        .then(()=>{
+            alert('singout successfull');
+            navigate(location?.state? location.state:"/")
+
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+
     return (
         <>
             <section className='w-full flex flex-col items-center bg-header-bg pt-8' >
                 <div className='w-fit mx-auto' >
                     <img src={logo} alt="" />
                 </div>
-                <nav className='py-8'>
-                    <NavLink to='/' className='text-white mr-4 text-base'>Home</NavLink>
-                    <NavLink to='/add' className='text-white mr-4 text-base'>add coffee</NavLink>
-                </nav>
+                {
+                    user?<p className='text-white'>{user?.email}</p> :''
+                }
+                
+                <div className='flex items-center justify-between'>
+                    <nav className='py-8'>
+                        <NavLink to='/' className='text-white mr-4 text-base'>Home</NavLink>
+                        <NavLink to='/add' className='text-white mr-4 text-base'>add coffee</NavLink>
+                    </nav>
+                    <nav>
+                    {
+                        user? <button onClick={handleLogOUt}  className='text-white mr-4 text-base'>Sing out</button>:
+                        <NavLink to='/signIn' className='text-white mr-4 text-base'>sign In</NavLink>
+                    }
+                        
+                        <NavLink to='/allUser' className='text-white mr-4 text-base'>Users</NavLink>
+                    </nav>
+                </div>
             </section>
             {/* <section className='w-full py-10 lg:h-[800px] bg-banner-bg bg-cover bg-no-repeat bg-bottom '>
                 <div className='w-8/12 h-full mx-auto flex justify-end items-center'>
